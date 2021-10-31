@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
+import firebase from "firebase";
 
 import Button from "../components/Button";
 
@@ -13,6 +14,27 @@ export default function SignUpScreen(props) {
   const { navigation } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  function handlePress() {
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        // 会員登録成功時
+        const { user } = userCredential;
+        console.log(user.uid);
+        //履歴をリセットさせることで戻る処理をさせない。
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "MemoList" }],
+        });
+      })
+      .catch((error) => {
+        // 会員登録失敗時
+        console.log(error.code, error.message);
+      });
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.inner}>
@@ -39,16 +61,7 @@ export default function SignUpScreen(props) {
           secureTextEntry // 伏字
           textContentType="password"
         ></TextInput>
-        <Button
-          label="Submit"
-          onPress={() => {
-            //履歴をリセットさせることで戻る処理をさせない。
-            navigation.reset({
-              index: 0,
-              routes: [{ name: "MemoList" }],
-            });
-          }}
-        />
+        <Button label="Submit" onPress={handlePress} />
         <View style={styles.footer}>
           <Text style={styles.footerText}>Alreedy registerd?</Text>
           <TouchableOpacity
