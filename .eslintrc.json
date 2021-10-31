@@ -15,6 +15,7 @@
   "rules": {
     "no-use-before-define": 0,
     "eslint-disable-next-line": "quotes",
-    "react/prop-types": ["error", { "ignore": ["navigation"] }]
+    "react/prop-types": ["error", { "ignore": ["navigation"] }],
+    "import/prefer-default-export": 0
   }
 }
