@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -14,6 +14,23 @@ export default function LogInScreen(props) {
   const { navigation } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  // ログイン監視
+  // 最後に[]を追加することで初期表示時に一度だけ下記の処理を行う。
+  // []を追加しなければpropsが変更される度に下記の処理を行う。
+  useEffect(() => {
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // ログイン済みであればログイン処理はせずメモ一覧画面へ遷移
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "MemoList" }],
+        });
+      }
+    });
+    // 次の画面へ遷移する際にログイン監視をキャンセル
+    return unsubscribe;
+  }, []);
 
   function handlePress() {
     firebase

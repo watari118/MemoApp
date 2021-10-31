@@ -28,13 +28,14 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="SignUp"
+        initialRouteName="LogIn"
         screenOptions={{
           headerStyle: { backgroundColor: "#467FD3" },
           headerTitleStyle: { color: "#ffffff" },
           headerTitle: "Memo App",
           headerTintColor: "#ffffff",
           headerBackTitle: "Back",
+          headerTitleAlign: "center",
           // IOSの画面遷移のアニメーションを統一
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS, // 横方向にスライド
           // IOS特有のスライドして前画面への遷移をandroidで再現
