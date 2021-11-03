@@ -62,6 +62,10 @@ npx eslint --init
 
 npm install @expo/vector-icons
 
+# Eslint のエラー箇所確認
+
+npx eslint ./src/**/*.jsx
+
 # React Hooks
 
 ・function Component でのみ使用できる
