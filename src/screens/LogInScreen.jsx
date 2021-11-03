@@ -5,9 +5,11 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import firebase from "firebase";
 import Loading from "../components/Loading";
+import { translateErrors } from "../utils";
 
 import Button from "../components/Button";
 
@@ -52,7 +54,8 @@ export default function LogInScreen(props) {
         });
       })
       .catch((error) => {
-        console.log(error.code, error.message);
+        const errorMsg = translateErrors(error.code);
+        Alert.alert(errorMsg.title, errorMsg.description);
       })
       .then(() => {
         // ログインに成功しても失敗してもローディング非表示

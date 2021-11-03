@@ -5,8 +5,10 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import firebase from "firebase";
+import { translateErrors } from "../utils";
 
 import Button from "../components/Button";
 
@@ -31,7 +33,8 @@ export default function SignUpScreen(props) {
       })
       .catch((error) => {
         // 会員登録失敗時
-        console.log(error.code, error.message);
+        const errorMsg = translateErrors(error.code);
+        Alert.alert(errorMsg.title, errorMsg.description);
       });
   }
 
