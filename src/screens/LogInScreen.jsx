@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import firebase from "firebase";
+import Loading from "../components/Loading";
 
 import Button from "../components/Button";
 
@@ -14,6 +15,7 @@ export default function LogInScreen(props) {
   const { navigation } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   // ログイン監視
   // 最後に[]を追加することで初期表示時に一度だけ下記の処理を行う。
@@ -26,6 +28,9 @@ export default function LogInScreen(props) {
           index: 0,
           routes: [{ name: "MemoList" }],
         });
+      } else {
+        // ログイン済みでない場合はローディング非表示
+        setIsLoading(false);
       }
     });
     // 次の画面へ遷移する際にログイン監視をキャンセル
@@ -33,6 +38,7 @@ export default function LogInScreen(props) {
   }, []);
 
   function handlePress() {
+    setIsLoading(true);
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
@@ -47,11 +53,16 @@ export default function LogInScreen(props) {
       })
       .catch((error) => {
         console.log(error.code, error.message);
+      })
+      .then(() => {
+        // ログインに成功しても失敗してもローディング非表示
+        setIsLoading(false);
       });
   }
 
   return (
     <View style={styles.container}>
+      <Loading isLoading={isLoading} />
       <View style={styles.inner}>
         <Text style={styles.title}>Log In</Text>
         <TextInput

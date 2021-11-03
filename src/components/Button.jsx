@@ -1,11 +1,12 @@
 import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
-import { string } from "prop-types";
+import { string, shape, func } from "prop-types";
 
 export default function Button(props) {
-  const { label, onPress } = props;
+  const { label, onPress, style } = props;
   return (
-    <TouchableOpacity style={styles.buttonContainer} onPress={onPress}>
+    // styleを配列にし、第二引数を追加することで上書き可能
+    <TouchableOpacity style={[styles.buttonContainer, style]} onPress={onPress}>
       <Text style={styles.buttonLabel}>{label}</Text>
     </TouchableOpacity>
   );
@@ -13,6 +14,13 @@ export default function Button(props) {
 
 Button.prototype = {
   label: string.isRequired,
+  onPress: func,
+  style: shape(),
+};
+
+Button.defaulePrpos = {
+  onPress: null,
+  style: null,
 };
 
 const styles = StyleSheet.create({
