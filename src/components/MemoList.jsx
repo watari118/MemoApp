@@ -5,16 +5,40 @@ import {
   StyleSheet,
   TouchableOpacity,
   FlatList,
+  Alert,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { shape, string, instanceOf, arrayOf } from "prop-types";
-
+import firebase from "firebase";
 import { deteToString } from "../utils";
 
 export default function MemoList(props) {
   const { memos } = props;
   const navigation = useNavigation();
+
+  function deleteMemo(id) {
+    const { currentUser } = firebase.auth();
+    if (currentUser) {
+      const db = firebase.firestore();
+      const ref = db.collection(`users/${currentUser.uid}/memos`).doc(id);
+      Alert.alert("メモを削除します。", "よろしいですか？", [
+        {
+          text: "キャンセル",
+          onPress: () => {},
+        },
+        {
+          text: "削除する",
+          style: "destructive", // 文字を赤くする(IOSのみ有効)
+          onPress: () => {
+            ref.delete().catch(() => {
+              Alert.alert("削除に失敗しました。");
+            });
+          },
+        },
+      ]);
+    }
+  }
 
   function renderItem({ item }) {
     return (
@@ -33,7 +57,14 @@ export default function MemoList(props) {
             {deteToString(item.updatedAt)}
           </Text>
         </View>
-        <TouchableOpacity style={styles.memoDetele} onPress={() => {}}>
+
+        {/* メモの削除 */}
+        <TouchableOpacity
+          style={styles.memoDetele}
+          onPress={() => {
+            deleteMemo(item.id);
+          }}
+        >
           <Feather name="x" size={24} color="#b0b0b0" />
         </TouchableOpacity>
       </TouchableOpacity>
