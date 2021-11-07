@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+// eslint-disable-next-line object-curly-newline
 import { shape, string, instanceOf, arrayOf } from "prop-types";
 import firebase from "firebase";
 import { deteToString } from "../utils";
@@ -76,6 +77,7 @@ export default function MemoList(props) {
       {/* FlatListによりスクロールが可能になる */}
       <FlatList
         data={memos}
+        // eslint-disable-next-line react/jsx-no-bind
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
       />

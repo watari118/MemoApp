@@ -1,12 +1,6 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  KeyboardAvoidingView,
-  KeyboardSafeView,
-} from "react-native";
+// eslint-disable-next-line object-curly-newline
+import { View, TextInput, StyleSheet, KeyboardAvoidingView, Alert } from "react-native";
 
 import firebase from "firebase";
 
@@ -24,16 +18,16 @@ export default function MemoCreateScreen(props) {
     ref
       .add({
         // ドキュメント作成
+        // eslint-disable-next-line object-shorthand
         bodyText: bodyText,
         updatedAt: new Date(),
       })
-      .then((docRef) => {
+      .then(() => {
         // docRef.id ⇒ 作成したドキュメントID
-        console.log("Created!", docRef.id);
         navigation.goBack();
       })
       .catch((error) => {
-        console.log("Error!", error);
+        Alert.alert("Error!", error);
       });
   }
 
@@ -51,6 +45,7 @@ export default function MemoCreateScreen(props) {
           autoFocus // 画面初期表示時にフォーカスを当てることでキーボード表示
         />
       </View>
+      {/* eslint-disable-next-line react/jsx-no-bind */}
       <CircleButton name="check" onPress={handlePress} />
     </KeyboardAvoidingView>
   );

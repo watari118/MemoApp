@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   View,
-  Text,
   TextInput,
   StyleSheet,
   KeyboardAvoidingView,
@@ -35,7 +34,7 @@ export default function MemoEditScreen(props) {
         .then(() => {
           navigation.goBack();
         })
-        .catch(() => {
+        .catch((error) => {
           const errorMsg = translateErrors(error.code);
           Alert.alert(errorMsg.title, errorMsg.description);
         });
@@ -56,6 +55,7 @@ export default function MemoEditScreen(props) {
           autoFocus
         />
       </View>
+      {/* eslint-disable-next-line react/jsx-no-bind */}
       <CircleButton name="check" onPress={handlePress} />
     </KeyboardAvoidingView>
   );

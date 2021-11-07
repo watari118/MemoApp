@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Text } from "react-native";
+// eslint-disable-next-line object-curly-newline
+import { View, StyleSheet, Text, Alert } from "react-native";
 import firebase from "firebase";
 import Button from "../components/Button";
 
@@ -23,9 +24,7 @@ export default function MemoListScreen(props) {
     const db = firebase.firestore();
     let unsubscribe = () => {};
     if (currentUser) {
-      const ref = db
-        .collection(`users/${currentUser.uid}/memos`)
-        .orderBy("updatedAt", "desc");
+      const ref = db.collection(`users/${currentUser.uid}/memos`).orderBy("updatedAt", "desc");
       unsubscribe = ref.onSnapshot(
         (snapshot) => {
           const userMemos = [];
@@ -40,7 +39,7 @@ export default function MemoListScreen(props) {
           setMemos(userMemos);
         },
         () => {
-          console.log("データの読み込みに失敗しました。");
+          Alert.alert("データの読み込みに失敗しました。");
         }
       );
     }

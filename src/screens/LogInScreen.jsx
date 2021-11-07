@@ -44,10 +44,9 @@ export default function LogInScreen(props) {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then((userCredentail) => {
-        const { user } = userCredentail;
-        console.log(user.uid);
-        //履歴をリセットさせることで戻る処理をさせない。
+      .then(() => {
+        // const { user } = userCredentail;
+        // 履歴をリセットさせることで戻る処理をさせない。
         navigation.reset({
           index: 0,
           routes: [{ name: "MemoList" }],
@@ -78,7 +77,7 @@ export default function LogInScreen(props) {
           keyboardType="email-address" // キーボードをメアド仕様に変更
           placeholder="Email Address"
           textContentType="emailAddress"
-        ></TextInput>
+        />
         <TextInput
           style={styles.input}
           value={password}
@@ -89,7 +88,8 @@ export default function LogInScreen(props) {
           placeholder="Passward"
           secureTextEntry // 伏字
           textContentType="password"
-        ></TextInput>
+        />
+        {/* eslint-disable-next-line react/jsx-no-bind */}
         <Button label="Submit" onPress={handlePress} />
         <View style={styles.footer}>
           <Text style={styles.footerText}>Not registered?</Text>
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   },
   input: {
     fontSize: 16,
-    //lineHeight: 32,
+    // lineHeight: 32,
     height: 48,
     borderColor: "#DDDDDD",
     borderWidth: 1,

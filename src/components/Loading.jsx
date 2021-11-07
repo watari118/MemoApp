@@ -17,9 +17,11 @@ export default function Loading(props) {
 }
 
 Loading.propTypes = {
+  // eslint-disable-next-line react/require-default-props
   isLoading: bool,
 };
 
+// 必須ではない項目の初期値を設定
 Loading.defalutProps = {
   isLoading: false,
 };

@@ -21,11 +21,10 @@ export default function SignUpScreen(props) {
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
+      .then(() => {
         // 会員登録成功時
-        const { user } = userCredential;
-        console.log(user.uid);
-        //履歴をリセットさせることで戻る処理をさせない。
+        // const { user } = userCredential;
+        // 履歴をリセットさせることで戻る処理をさせない。
         navigation.reset({
           index: 0,
           routes: [{ name: "MemoList" }],
@@ -52,7 +51,7 @@ export default function SignUpScreen(props) {
           keyboardType="email-address" // キーボードをメアド仕様に変更
           placeholder="Email Address"
           textContentType="emailAddress"
-        ></TextInput>
+        />
         <TextInput
           style={styles.input}
           value={password}
@@ -63,7 +62,8 @@ export default function SignUpScreen(props) {
           placeholder="Passward"
           secureTextEntry // 伏字
           textContentType="password"
-        ></TextInput>
+        />
+        {/* eslint-disable-next-line react/jsx-no-bind */}
         <Button label="Submit" onPress={handlePress} />
         <View style={styles.footer}>
           <Text style={styles.footerText}>Alreedy registerd?</Text>
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   },
   input: {
     fontSize: 16,
-    //lineHeight: 32,
+    // lineHeight: 32,
     height: 48,
     borderColor: "#DDDDDD",
     borderWidth: 1,

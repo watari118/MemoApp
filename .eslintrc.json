@@ -14,8 +14,11 @@
   "plugins": ["react"],
   "rules": {
     "no-use-before-define": 0,
-    "eslint-disable-next-line": "quotes",
+    // "eslint-disable-next-line": 1,
+    "linebreak-style": ["error", "windows"],
     "react/prop-types": ["error", { "ignore": ["navigation"] }],
-    "import/prefer-default-export": 0
+    "import/prefer-default-export": 0,
+    "quotes": "off",
+    "comma-dangle": ["error", "only-multiline"]
   }
 }

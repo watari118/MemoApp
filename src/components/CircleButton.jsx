@@ -4,6 +4,7 @@ import { string, shape, func } from "prop-types";
 import { Feather } from "@expo/vector-icons";
 
 export default function CircleButton(props) {
+  // eslint-disable-next-line react/prop-types
   const { style, name, onPress } = props;
   return (
     <TouchableOpacity style={[styles.circleButton, style]} onPress={onPress}>

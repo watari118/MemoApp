@@ -1,8 +1,9 @@
 import React from "react";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { string, shape, func } from "prop-types";
 
 export default function Button(props) {
+  // eslint-disable-next-line react/prop-types
   const { label, onPress, style } = props;
   return (
     // styleを配列にし、第二引数を追加することで上書き可能

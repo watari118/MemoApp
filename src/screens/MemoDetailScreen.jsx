@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+// eslint-disable-next-line object-curly-newline
 import { View, ScrollView, Text, StyleSheet } from "react-native";
 import { shape, string } from "prop-types";
 import firebase from "firebase";
@@ -36,9 +37,7 @@ export default function MemoDetailScreen(props) {
         <Text style={styles.memoTitle} numberOfLines={1}>
           {memo && memo.bodyText}
         </Text>
-        <Text style={styles.memoDate}>
-          {memo && deteToString(memo.updatedAt)}
-        </Text>
+        <Text style={styles.memoDate}>{memo && deteToString(memo.updatedAt)}</Text>
       </View>
       <ScrollView style={styles.memoBody}>
         <Text style={styles.memoText}>{memo && memo.bodyText}</Text>

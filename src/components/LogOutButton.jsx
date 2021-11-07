@@ -1,5 +1,6 @@
 import React from "react";
-import { TouchableOpacity, Text, StyleSheet } from "react-native";
+// eslint-disable-next-line object-curly-newline
+import { TouchableOpacity, Text, StyleSheet, Alert } from "react-native";
 import firebase from "firebase";
 import { useNavigation } from "@react-navigation/native";
 
@@ -18,11 +19,12 @@ export default function LogOutButton() {
         });
       })
       .catch(() => {
-        console.log("ログアウトに失敗しました。");
+        Alert.alert("ログアウトに失敗しました。");
       });
   }
 
   return (
+    // eslint-disable-next-line react/jsx-no-bind
     <TouchableOpacity onPress={handlePress} style={styles.container}>
       <Text style={styles.label}>ログアウト</Text>
     </TouchableOpacity>
