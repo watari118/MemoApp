@@ -49,7 +49,7 @@ export default function MemoList(props) {
           navigation.navigate("MemoDetail", { id: item.id });
         }}
       >
-        <View>
+        <View style={styles.momeInner}>
           {/* numberOfLinesで任意の行数までを表示 */}
           <Text style={styles.memoListItemTitle} numberOfLines={1}>
             {item.bodyText}
@@ -108,6 +108,9 @@ const styles = StyleSheet.create({
     alignItems: "center", // 上下方向の中央揃え
     borderBottomWidth: 1,
     borderColor: "rgba(0,0,0,0.15)",
+  },
+  momeInner: {
+    flex: 1,
   },
   memoListItemTitle: {
     fontSize: 16,

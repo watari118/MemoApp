@@ -1,10 +1,11 @@
+/* eslint-disable linebreak-style */
 import React from "react";
+import { LogBox } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import {
   createStackNavigator,
   CardStyleInterpolators,
 } from "@react-navigation/stack";
-import { initializeApp } from "firebase/app";
 import firebase from "firebase";
 
 import MemoListScreen from "./src/screens/MemoListScreen";
@@ -18,13 +19,16 @@ import { firebaseConfig } from "./env";
 
 require("firebase/firestore");
 
-//firebaseの初期化;
-//const app = initializeApp(firebaseConfig);
+// firebaseの初期化;
+// const app = initializeApp(firebaseConfig);
 if (firebase.apps.length === 0) {
   firebase.initializeApp(firebaseConfig);
 }
 
 const Stack = createStackNavigator();
+
+// 下記の警告を非表示
+LogBox.ignoreLogs(["Setting a timer"]);
 
 export default function App() {
   return (
