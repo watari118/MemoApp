@@ -24,6 +24,18 @@ git remote リモートリポジトリの一覧を表示する。
 
 ssh -T github.com で github の接続確認ができる。
 
+# ssh-agent を起動
+
+eval "$(ssh-agent -s)"
+
+# ssh-agent に SSH キーを追加して、キーチェーンにパスフレーズを保存
+
+ssh-add または ssh-add ~/.ssh/任意のファイル
+
+# ssh-agent を終了させる
+
+ssh-agent -k
+
 # 最初のプッシュのみ下記のコマンドを実行
 
 git push -u origin master
