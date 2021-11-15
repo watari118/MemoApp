@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 // eslint-disable-next-line object-curly-newline
-import { View, StyleSheet, Text, Alert } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import firebase from "firebase";
 import Button from "../components/Button";
 
 import MemoList from "../components/MemoList";
 import CircleButton from "../components/CircleButton";
 import LogOutButton from "../components/LogOutButton";
+import Loading from "../components/Loading";
 
 export default function MemoListScreen(props) {
   const { navigation } = props;
   const [memos, setMemos] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     navigation.setOptions({
@@ -24,7 +26,9 @@ export default function MemoListScreen(props) {
     const db = firebase.firestore();
     let unsubscribe = () => {};
     if (currentUser) {
-      const ref = db.collection(`users/${currentUser.uid}/memos`).orderBy("updatedAt", "desc");
+      const ref = db
+        .collection(`users/${currentUser.uid}/memos`)
+        .orderBy("updatedAt", "desc");
       unsubscribe = ref.onSnapshot(
         (snapshot) => {
           const userMemos = [];
@@ -37,9 +41,10 @@ export default function MemoListScreen(props) {
             });
           });
           setMemos(userMemos);
+          setIsLoading(false);
         },
         () => {
-          Alert.alert("データの読み込みに失敗しました。");
+          // Alert.alert("データの読み込みに失敗しました。");
         }
       );
     }
@@ -49,6 +54,7 @@ export default function MemoListScreen(props) {
   if (memos.length === 0) {
     return (
       <View style={emptyStyles.container}>
+        <Loading isLoading={isLoading} />
         <View style={emptyStyles.inner}>
           <Text style={emptyStyles.title}>最初のメモを作成しよう</Text>
           <Button
@@ -65,6 +71,7 @@ export default function MemoListScreen(props) {
 
   return (
     <View style={styles.container}>
+      <Loading isLoading={isLoading} />
       {/* Memoリスト */}
       <MemoList memos={memos} />
 
