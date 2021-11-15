@@ -22,6 +22,8 @@ git remote rm origin すると、.git/config ファイルの [remote "origin”]
 
 git remote リモートリポジトリの一覧を表示する。
 
+ssh -T github.com で github の接続確認ができる。
+
 # 最初のプッシュのみ下記のコマンドを実行
 
 git push -u origin master
@@ -64,7 +66,7 @@ npm install @expo/vector-icons
 
 # Eslint のエラー箇所確認
 
-npx eslint ./src/**/*.jsx
+npx eslint ./src/\*_/_.jsx
 
 # React Hooks
 
