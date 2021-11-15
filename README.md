@@ -22,7 +22,7 @@ git remote rm origin すると、.git/config ファイルの [remote "origin”]
 
 git remote リモートリポジトリの一覧を表示する。
 
-ssh -T github.com で github の接続確認ができる。
+ssh -T github.com で github の接続確認ができる。。
 
 # ssh-agent を起動
 
