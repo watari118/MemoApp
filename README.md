@@ -1,15 +1,3 @@
-ssh -T git@github.com -i ~/.ssh/id_rsa_github
-
-ssh -T git@github.com -i "C:\Udemy\repo\id_rsa_github"
-
-vim ~/.ssh.config
-
-ssh -T github
-
-git remote add origin git@github.com:KousukeIshiwatari/repo.git
-
-cd ~/.ssh
-
 # ssh キー生成
 
 ssh-keygen -t rsa -b 4096 -C"メールアドレス"
